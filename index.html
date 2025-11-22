@@ -1,0 +1,855 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Northern City University – Knowledge for Progress</title>
+
+  <!-- Google Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: "Poppins", Arial, sans-serif;
+      background: #f5f6fa;
+      color: #222;
+    }
+    a { text-decoration: none; color: inherit; }
+
+    /* TOP BAR */
+    .top-bar {
+      background: #002b5c;
+      color: #f5f5f5;
+      font-size: 13px;
+    }
+    .top-bar-inner {
+      max-width: 1200px;
+      margin: auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 6px 16px;
+    }
+    .top-left span { margin-right: 15px; }
+    .top-right a { margin-left: 10px; font-weight: 500; }
+    .top-right .apply-btn {
+      padding: 5px 10px;
+      background: #f1c40f;
+      border-radius: 999px;
+      color: #002b5c;
+      font-weight: 600;
+    }
+
+    /* NAVBAR */
+    .navbar {
+      background: #ffffff;
+      border-bottom: 1px solid #e0e0e0;
+      position: sticky;
+      top: 0;
+      z-index: 50;
+    }
+    .nav-inner {
+      max-width: 1200px;
+      margin: auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 16px;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .logo-icon {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: #002b5c;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #f1c40f;
+      font-weight: 700;
+      font-size: 18px;
+    }
+    .logo-text { line-height: 1.2; }
+    .logo-text span:first-child {
+      font-weight: 700;
+      font-size: 18px;
+      color: #002b5c;
+    }
+    .logo-text span:last-child {
+      font-size: 12px;
+      color: #777;
+    }
+    .nav-links {
+      display: flex;
+      gap: 18px;
+      font-size: 14px;
+      font-weight: 500;
+    }
+    .nav-links a {
+      padding-bottom: 3px;
+      border-bottom: 2px solid transparent;
+      color: #333;
+    }
+    .nav-links a:hover {
+      border-bottom-color: #002b5c;
+      color: #002b5c;
+    }
+
+    /* HERO SECTION */
+    .hero {
+      position: relative;
+      background: url("https://images.pexels.com/photos/256490/pexels-photo-256490.jpeg")
+        center/cover no-repeat;
+      min-height: 65vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to right,
+        rgba(0, 0, 0, 0.65),
+        rgba(0, 0, 0, 0.3)
+      );
+    }
+    .hero-inner {
+      position: relative;
+      z-index: 1;
+      max-width: 1200px;
+      margin: auto;
+      padding: 50px 16px 70px;
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.9fr);
+      gap: 30px;
+      color: #fff;
+    }
+    .hero-text h1 {
+      font-size: 38px;
+      margin-bottom: 10px;
+      font-weight: 700;
+    }
+    .hero-text p {
+      font-size: 15px;
+      max-width: 520px;
+      margin-bottom: 18px;
+      line-height: 1.6;
+    }
+    .hero-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 20px;
+    }
+    .hero-badges span {
+      background: #ffffff26;
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-size: 11px;
+    }
+    .btn-primary,
+    .btn-outline {
+      display: inline-block;
+      padding: 10px 18px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 600;
+      margin-right: 10px;
+      margin-top: 4px;
+      transition: 0.2s;
+    }
+    .btn-primary {
+      background: #f1c40f;
+      color: #002b5c;
+    }
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 22px rgba(0, 0, 0, 0.35);
+    }
+    .btn-outline {
+      border: 1px solid #f1c40f;
+      color: #f1c40f;
+      background: transparent;
+    }
+    .btn-outline:hover {
+      background: #f1c40f;
+      color: #002b5c;
+    }
+
+    /* HERO CARD: NOTICE + AUTO TICKER */
+    .hero-card {
+      background: #ffffff;
+      border-radius: 18px;
+      padding: 18px 18px 20px;
+      color: #222;
+      box-shadow: 0 14px 35px rgba(0, 0, 0, 0.35);
+      font-size: 13px;
+    }
+    .hero-card h3 {
+      margin-bottom: 10px;
+      font-size: 18px;
+      color: #002b5c;
+    }
+    .notice-ticker {
+      background: #f9f9f9;
+      border-radius: 10px;
+      padding: 8px 10px;
+      margin-bottom: 8px;
+      font-size: 12px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .notice-ticker-label {
+      font-weight: 700;
+      color: #c0392b;
+    }
+    .notice-ticker-text {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .notice-list {
+      list-style: none;
+      max-height: 180px;
+      overflow: auto;
+      padding-right: 6px;
+    }
+    .notice-list li {
+      padding: 6px 0;
+      border-bottom: 1px dashed #eee;
+    }
+    .notice-date {
+      font-size: 11px;
+      color: #999;
+      display: block;
+    }
+    .notice-title {
+      color: #333;
+    }
+    .view-all {
+      display: inline-block;
+      margin-top: 10px;
+      font-size: 12px;
+      color: #002b5c;
+      font-weight: 600;
+    }
+
+    /* GENERIC SECTION */
+    .section { padding: 50px 16px; }
+    .section-inner { max-width: 1200px; margin: auto; }
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 16px;
+      gap: 10px;
+    }
+    .section-title {
+      font-size: 24px;
+      color: #002b5c;
+    }
+    .section-subtitle {
+      font-size: 13px;
+      color: #666;
+    }
+
+    /* LOGIN / RESULTS / ADMISSION LAYOUT */
+    .two-column {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 20px;
+    }
+    .card-box {
+      background: #ffffff;
+      border-radius: 14px;
+      padding: 18px 18px 20px;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+      font-size: 13px;
+    }
+    .card-box h3 {
+      margin-bottom: 8px;
+      color: #002b5c;
+    }
+    label {
+      display: block;
+      font-size: 12px;
+      font-weight: 600;
+      margin-bottom: 4px;
+      color: #555;
+    }
+    input, select, textarea {
+      width: 100%;
+      padding: 8px 10px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-family: inherit;
+      font-size: 13px;
+      margin-bottom: 8px;
+    }
+    textarea { min-height: 70px; resize: vertical; }
+
+    .btn-small {
+      display: inline-block;
+      padding: 7px 14px;
+      border-radius: 999px;
+      border: none;
+      background: #002b5c;
+      color: #fff;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      margin-top: 4px;
+    }
+
+    .result-output, .login-output, .admin-output {
+      margin-top: 6px;
+      font-size: 12px;
+      color: #333;
+    }
+    .success { color: #27ae60; }
+    .error { color: #c0392b; }
+
+    /* NEWS GRID */
+    .news-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 18px;
+    }
+    .news-card {
+      background: #fff;
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+      display: flex;
+      flex-direction: column;
+      font-size: 13px;
+    }
+    .news-card img {
+      width: 100%;
+      height: 150px;
+      object-fit: cover;
+    }
+    .news-content {
+      padding: 14px 16px 18px;
+    }
+    .news-tag {
+      font-size: 11px;
+      color: #888;
+      margin-bottom: 4px;
+    }
+    .news-title {
+      font-weight: 600;
+      margin-bottom: 6px;
+      color: #002b5c;
+    }
+    .news-date {
+      font-size: 11px;
+      color: #999;
+      margin-top: 8px;
+    }
+
+    /* FOOTER */
+    footer {
+      background: #0d1a33;
+      color: #ddd;
+      padding: 30px 16px 14px;
+      font-size: 13px;
+    }
+    .footer-inner {
+      max-width: 1200px;
+      margin: auto;
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 20px;
+      border-bottom: 1px solid #263654;
+      padding-bottom: 16px;
+    }
+    .footer-inner h4 { font-size: 15px; margin-bottom: 8px; }
+    .footer-inner p,
+    .footer-inner li { font-size: 13px; color: #ccc; }
+    .footer-list { list-style: none; }
+    .footer-list li { margin-bottom: 4px; }
+    .footer-bottom {
+      max-width: 1200px;
+      margin: 10px auto 0;
+      text-align: center;
+      color: #999;
+    }
+
+    /* SIMPLE ANIMATION / FADE-UP */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .fade-up.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 900px) {
+      .hero-inner { grid-template-columns: 1fr; }
+      .hero-text h1 { font-size: 28px; }
+      .nav-links { display: none; }
+      .footer-inner { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 620px) {
+      .footer-inner { grid-template-columns: 1fr; }
+      .top-bar-inner {
+        flex-direction: column;
+        gap: 4px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TOP BAR -->
+  <div class="top-bar">
+    <div class="top-bar-inner">
+      <div class="top-left">
+        <span>☎ +8801XXXXXXXXX</span>
+        <span>✉ info@northerncityuniversity.edu</span>
+      </div>
+      <div class="top-right">
+        <a href="#student-login">Student Portal</a>
+        <a href="#admin">Admin</a>
+        <a href="#admission" class="apply-btn">Apply Now</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- NAVBAR -->
+  <header class="navbar">
+    <div class="nav-inner">
+      <div class="logo">
+        <div class="logo-icon">NU</div>
+        <div class="logo-text">
+          <span>Northern City University</span><br />
+          <span>Knowledge for Progress</span>
+        </div>
+      </div>
+      <nav class="nav-links">
+        <a href="#top">Home</a>
+        <a href="#about">About</a>
+        <a href="#student-login">Student Login</a>
+        <a href="#results">Results</a>
+        <a href="#news">News</a>
+        <a href="#admission">Admission</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section id="top" class="hero">
+    <div class="hero-inner">
+      <div class="hero-text fade-up">
+        <h1>Empowering future leaders with quality education.</h1>
+        <p>
+          Northern City University offers industry-focused programs,
+          experienced faculty, and a student-centered environment inspired by
+          top universities.
+        </p>
+        <div class="hero-badges">
+          <span>UG & PG Programs</span>
+          <span>Modern Campus</span>
+          <span>Scholarship Options</span>
+        </div>
+        <a href="#admission" class="btn-primary">Apply for Admission</a>
+        <a href="#programs" class="btn-outline">View Programs</a>
+      </div>
+
+      <!-- NOTICE BOARD WITH AUTO TICKER -->
+      <div class="hero-card fade-up">
+        <h3>Notice Board</h3>
+        <div class="notice-ticker">
+          <span class="notice-ticker-label">Latest:</span>
+          <span id="tickerNotice" class="notice-ticker-text">Loading latest notice...</span>
+        </div>
+        <ul id="noticeList" class="notice-list">
+          <!-- filled by JS -->
+        </ul>
+        <span class="view-all">All notices are demo on this static site</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT / SIMPLE INTRO -->
+  <section id="about" class="section">
+    <div class="section-inner fade-up">
+      <div class="section-header">
+        <div>
+          <h2 class="section-title">About Northern City University</h2>
+          <p class="section-subtitle">
+            A modern, student-focused institution inspired by leading private universities in Bangladesh.
+          </p>
+        </div>
+      </div>
+      <p style="font-size:14px; color:#555; max-width:800px;">
+        Northern City University (demo) aims to provide quality higher education in a supportive,
+        inclusive environment. This website is a static HTML/CSS/JS project – no real backend or
+        database – built to demonstrate a university-style design with student login, results,
+        admission form, admin UI, and notice system.
+      </p>
+    </div>
+  </section>
+
+  <!-- STUDENT LOGIN + RESULTS -->
+  <section id="student-login" class="section" style="background:#eef2f7;">
+    <div class="section-inner fade-up">
+      <div class="section-header">
+        <div>
+          <h2 class="section-title">Student Portal & Results (Demo)</h2>
+          <p class="section-subtitle">
+            These panels are frontend-only demo features (no real accounts).
+          </p>
+        </div>
+      </div>
+
+      <div class="two-column">
+        <!-- Student Login -->
+        <div class="card-box">
+          <h3>Student Login</h3>
+          <label for="studentId">Student ID</label>
+          <input type="text" id="studentId" placeholder="e.g. 2025001" />
+          <label for="studentPassword">Password</label>
+          <input type="password" id="studentPassword" placeholder="demo password: 1234" />
+          <button class="btn-small" onclick="studentLogin()">Login</button>
+          <div id="loginOutput" class="login-output"></div>
+        </div>
+
+        <!-- Results Search -->
+        <div id="results" class="card-box">
+          <h3>Result Lookup</h3>
+          <label for="resultId">Student ID</label>
+          <input type="text" id="resultId" placeholder="e.g. 2025001" />
+          <label for="resultSemester">Semester / Exam</label>
+          <input type="text" id="resultSemester" placeholder="e.g. Fall 2025" />
+          <button class="btn-small" onclick="searchResult()">View Result</button>
+          <div id="resultOutput" class="result-output"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ADMISSION FORM + ADMIN PANEL -->
+  <section id="admission" class="section">
+    <div class="section-inner fade-up">
+      <div class="section-header">
+        <div>
+          <h2 class="section-title">Admission & Admin (Frontend Demo)</h2>
+          <p class="section-subtitle">
+            A simple admission request form and a fake admin panel to manage notices in the browser.
+          </p>
+        </div>
+      </div>
+
+      <div class="two-column">
+        <!-- Admission Form -->
+        <div class="card-box">
+          <h3>Online Admission Request</h3>
+          <label for="adName">Full Name</label>
+          <input type="text" id="adName" placeholder="Your full name" />
+          <label for="adPhone">Phone</label>
+          <input type="text" id="adPhone" placeholder="+8801XXXXXXXXX" />
+          <label for="adEmail">Email</label>
+          <input type="email" id="adEmail" placeholder="you@example.com" />
+          <label for="adProgram">Program</label>
+          <select id="adProgram">
+            <option value="BSc in CSE">BSc in CSE</option>
+            <option value="BBA">BBA</option>
+            <option value="BA in English">BA in English</option>
+            <option value="LLB">LLB</option>
+          </select>
+          <label for="adMessage">Message (optional)</label>
+          <textarea id="adMessage" placeholder="Tell us a bit about yourself..."></textarea>
+          <button class="btn-small" onclick="submitAdmission()">Submit Admission Form</button>
+          <div id="admissionOutput" class="result-output"></div>
+        </div>
+
+        <!-- Admin Panel (Fake) -->
+        <div id="admin" class="card-box">
+          <h3>Admin Panel (Demo Only)</h3>
+          <p style="font-size:12px; margin-bottom:8px;">
+            This section only updates notices on the current page. No database is used.
+          </p>
+          <label for="adminPassword">Admin Password</label>
+          <input type="password" id="adminPassword" placeholder="demo: admin123" />
+          <button class="btn-small" onclick="adminLogin()">Login as Admin</button>
+          <div id="adminOutput" class="admin-output"></div>
+
+          <div id="adminTools" style="display:none; margin-top:10px;">
+            <hr style="margin:8px 0;">
+            <h4 style="font-size:14px; margin-bottom:6px;">Add New Notice</h4>
+            <label for="newNoticeTitle">Notice Title</label>
+            <input type="text" id="newNoticeTitle" placeholder="Notice headline..." />
+            <button class="btn-small" onclick="addNotice()">Add Notice</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- NEWS SECTION -->
+  <section id="news" class="section" style="background:#eef2f7;">
+    <div class="section-inner fade-up">
+      <div class="section-header">
+        <div>
+          <h2 class="section-title">News & Events</h2>
+          <p class="section-subtitle">
+            Example news cards – you can edit the content as you like.
+          </p>
+        </div>
+      </div>
+
+      <div class="news-grid">
+        <article class="news-card">
+          <img src="https://images.pexels.com/photos/1181396/pexels-photo-1181396.jpeg" alt="Seminar" />
+          <div class="news-content">
+            <div class="news-tag">Seminar</div>
+            <div class="news-title">Industry 4.0 & Emerging Tech</div>
+            <p>Department of CSE hosted a seminar with leading experts on AI, IoT and automation.</p>
+            <div class="news-date">02 Nov 2025</div>
+          </div>
+        </article>
+
+        <article class="news-card">
+          <img src="https://images.pexels.com/photos/207691/pexels-photo-207691.jpeg" alt="Convocation" />
+          <div class="news-content">
+            <div class="news-tag">Convocation</div>
+            <div class="news-title">Convocation Ceremony</div>
+            <p>Graduates celebrated their achievements in a colorful convocation program.</p>
+            <div class="news-date">15 Oct 2025</div>
+          </div>
+        </article>
+
+        <article class="news-card">
+          <img src="https://images.pexels.com/photos/3059748/pexels-photo-3059748.jpeg" alt="Club activities" />
+          <div class="news-content">
+            <div class="news-tag">Student Club</div>
+            <div class="news-title">Cultural Night</div>
+            <p>Clubs arranged performances, music, drama, and more to welcome new students.</p>
+            <div class="news-date">01 Oct 2025</div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <div>
+        <h4>Northern City University</h4>
+        <p>
+          123 University Road<br>
+          Dhaka, Bangladesh
+        </p>
+        <p>Phone: +8801XXXXXXXXX<br>Email: info@northerncityuniversity.edu</p>
+      </div>
+      <div>
+        <h4>Quick Links</h4>
+        <ul class="footer-list">
+          <li><a href="#admission">Admission</a></li>
+          <li><a href="#programs">Programs</a></li>
+          <li><a href="#news">News & Events</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Student Corner</h4>
+        <ul class="footer-list">
+          <li><a href="#student-login">Student Portal</a></li>
+          <li><a href="#results">Results</a></li>
+          <li><a href="#top">Online Notice</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      © 2025 Northern City University (Demo) – Frontend-only project inspired by Bangladeshi universities
+    </div>
+  </footer>
+
+  <script>
+    // --- Demo data ---
+    const notices = [
+      { date: "05 Nov 2025", title: "Midterm exam routine – Fall 2025" },
+      { date: "01 Nov 2025", title: "Orientation schedule for new students" },
+      { date: "25 Oct 2025", title: "Scholarship application deadline extended" },
+      { date: "20 Oct 2025", title: "Convocation registration notice" }
+    ];
+
+    const students = {
+      "2025001": { name: "Imran Sikder", program: "BSc in CSE", cgpa: "3.85" },
+      "2025002": { name: "Ayan Rahman",  program: "BBA",       cgpa: "3.65" }
+    };
+
+    let currentNoticeIndex = 0;
+    let isAdminLoggedIn = false;
+
+    // --- Notice rendering + auto ticker ---
+    function renderNotices() {
+      const list = document.getElementById("noticeList");
+      list.innerHTML = "";
+      notices.forEach(n => {
+        const li = document.createElement("li");
+        li.innerHTML =
+          '<span class="notice-date">' + n.date + '</span>' +
+          '<span class="notice-title">' + n.title + "</span>";
+        list.appendChild(li);
+      });
+    }
+
+    function updateTicker() {
+      const ticker = document.getElementById("tickerNotice");
+      if (!notices.length) {
+        ticker.textContent = "No notices available.";
+        return;
+      }
+      const n = notices[currentNoticeIndex];
+      ticker.textContent = n.date + " – " + n.title;
+      currentNoticeIndex = (currentNoticeIndex + 1) % notices.length;
+    }
+
+    // --- Student login (demo only) ---
+    function studentLogin() {
+      const id = document.getElementById("studentId").value.trim();
+      const pass = document.getElementById("studentPassword").value.trim();
+      const out = document.getElementById("loginOutput");
+
+      if (!id || !pass) {
+        out.textContent = "Please enter student ID and password.";
+        out.className = "login-output error";
+        return;
+      }
+
+      if (students[id] && pass === "1234") {
+        out.textContent = "Welcome, " + students[id].name + " (" + students[id].program + "). (Demo login only)";
+        out.className = "login-output success";
+      } else {
+        out.textContent = "Invalid ID or password (demo data only).";
+        out.className = "login-output error";
+      }
+    }
+
+    // --- Results search (demo only) ---
+    function searchResult() {
+      const id = document.getElementById("resultId").value.trim();
+      const sem = document.getElementById("resultSemester").value.trim();
+      const out = document.getElementById("resultOutput");
+
+      if (!id || !sem) {
+        out.textContent = "Please enter both student ID and semester.";
+        out.className = "result-output error";
+        return;
+      }
+
+      if (students[id]) {
+        out.innerHTML =
+          '<span class="success">Result found (demo):</span><br>' +
+          "Name: " + students[id].name + "<br>" +
+          "Program: " + students[id].program + "<br>" +
+          "Semester: " + sem + "<br>" +
+          "CGPA: " + students[id].cgpa;
+        out.className = "result-output";
+      } else {
+        out.textContent = "No result found for this ID in demo data.";
+        out.className = "result-output error";
+      }
+    }
+
+    // --- Admission form (demo only) ---
+    function submitAdmission() {
+      const name = document.getElementById("adName").value.trim();
+      const phone = document.getElementById("adPhone").value.trim();
+      const email = document.getElementById("adEmail").value.trim();
+      const program = document.getElementById("adProgram").value;
+      const out = document.getElementById("admissionOutput");
+
+      if (!name || !phone || !email) {
+        out.textContent = "Please fill in name, phone and email.";
+        out.className = "result-output error";
+        return;
+      }
+
+      out.textContent =
+        "Thank you, " + name +
+        ". Your admission request for " + program +
+        " has been received (demo only).";
+      out.className = "result-output success";
+    }
+
+    // --- Admin login (demo only) ---
+    function adminLogin() {
+      const pass = document.getElementById("adminPassword").value.trim();
+      const out = document.getElementById("adminOutput");
+      const tools = document.getElementById("adminTools");
+
+      if (pass === "admin123") {
+        isAdminLoggedIn = true;
+        out.textContent = "Admin logged in (demo only, no real security).";
+        out.className = "admin-output success";
+        tools.style.display = "block";
+      } else {
+        isAdminLoggedIn = false;
+        out.textContent = "Wrong admin password (demo: admin123).";
+        out.className = "admin-output error";
+        tools.style.display = "none";
+      }
+    }
+
+    // --- Add notice (frontend only) ---
+    function addNotice() {
+      if (!isAdminLoggedIn) {
+        alert("Please log in as admin first.");
+        return;
+      }
+      const titleInput = document.getElementById("newNoticeTitle");
+      const title = titleInput.value.trim();
+      if (!title) {
+        alert("Write a notice title.");
+        return;
+      }
+      const today = new Date();
+      const dateStr =
+        today.getDate().toString().padStart(2, "0") + " " +
+        today.toLocaleString("default", { month: "short" }) + " " +
+        today.getFullYear();
+
+      notices.unshift({ date: dateStr, title: title });
+      titleInput.value = "";
+      renderNotices();
+      updateTicker();
+    }
+
+    // --- Fade-up scroll animation ---
+    const fadeEls = document.querySelectorAll(".fade-up");
+    function handleScroll() {
+      const trigger = window.innerHeight * 0.85;
+      fadeEls.forEach(el => {
+        const rect = el.getBoundingClientRect();
+        if (rect.top < trigger) {
+          el.classList.add("show");
+        }
+      });
+    }
+    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("load", () => {
+      renderNotices();
+      updateTicker();
+      setInterval(updateTicker, 3000); // auto rotate notice every 3s
+      handleScroll();
+    });
+  </script>
+</body>
+</html>
